@@ -169,6 +169,23 @@ Smooths slow-changing values (temperature, humidity, CO₂) over 10-60 second wi
   "param": "grain_size",
   "value": 0.15
 }
+
+**Elemental Control (server-side):**
+```json
+{
+  "type": "set_element",
+  "element": "earth",        // one of: earth, air, water, fire
+  "value": 0.65               // normalized float
+}
+```
+
+**Elemental Bus Frame (server → client):**
+```json
+{
+  "type": "elements",
+  "values": {"earth": 0.65, "air": 0.12, "water": 0.0, "fire": -0.3}
+}
+```
 ```
 
 **Server → Client (Telemetry):**
@@ -242,6 +259,20 @@ Smooths slow-changing values (temperature, humidity, CO₂) over 10-60 second wi
 **Right Column:**
 - **Macros** - 8 assignable knobs
 - **Scene Selector** - Preset browser
+
+### Elemental Controls
+To make mappings quick, consistent, and performable across both audio and visual clients, the HUD exposes four small elemental buses (Earth, Air, Water, Fire). These are shown as a compact macro strip and can be mapped to multiple parameters at once.
+
+Default element-to-parameter mappings (examples):
+- Earth: grain density, low shelving, bass emphasis
+- Air: spectral tilt (high-shelf), shimmer, filter Q
+- Water: reverb mix/decay, delay diffusion, crossfade wet/dry
+- Fire: Nutube drive, distortion amount, harmonic saturation
+
+Mechanical/UX notes:
+- Provide an on-screen per-element bypass and an optional per-element hardware encoder for live tuning
+- Maintain a single `Terroir Depth` master blend for live environmental coupling
+- Export element streams into ER Files so recorded terroi include elemental history
 
 ### Deployment
 
